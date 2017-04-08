@@ -41,13 +41,13 @@ func TestGorillaMuxLister_Extract(t *testing.T) {
 
 	expected := ResultSet{
 		Result{REQUEST_URI: "/", ROUTE_NAME: "index", HTTP_METHODS: "",
-			HANDLER_NAME: "github.com/adelowo/muxlist/gorillamux.TestMain.func1"},
+			HANDLER_NAME: "github.com/adelowo/muxlist.TestMain.func1"},
 
 		Result{REQUEST_URI: "/users", ROUTE_NAME: "users", HTTP_METHODS: "",
-			HANDLER_NAME: "github.com/adelowo/muxlist/gorillamux.TestMain.func2"},
+			HANDLER_NAME: "github.com/adelowo/muxlist.TestMain.func2"},
 
 		Result{REQUEST_URI: "/about", ROUTE_NAME: "", HTTP_METHODS: "",
-			HANDLER_NAME: "github.com/adelowo/muxlist/gorillamux.TestMain.func3"},
+			HANDLER_NAME: "github.com/adelowo/muxlist.TestMain.func3"},
 	}
 
 	if !reflect.DeepEqual(expected, result) {
