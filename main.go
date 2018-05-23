@@ -27,5 +27,10 @@ func (lister *MuxLister) Table() {
 
 //Returns a human readable name for a http Handler
 func GetHumanReadableNameForHandler(h http.Handler) string {
-	return runtime.FuncForPC(reflect.ValueOf(h).Pointer()).Name()
+	reflectValue := reflect.ValueOf(h)
+
+	if !reflectValue.IsValid() {
+		return "SUBROUTER"
+	}
+	return runtime.FuncForPC(reflectValue.Pointer()).Name()
 }
