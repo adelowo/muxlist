@@ -3,6 +3,7 @@ package muxlist
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/gorilla/mux"
 )
@@ -32,7 +33,7 @@ func (m *GorillaMuxLister) Extract() ResultSet {
 		}
 
 		r[ROUTE_NAME] = route.GetName()
-		r[HTTP_METHODS] = "" //Currently unavailable for Gorilla Mux but there's a pending PR for this
+		r[HTTP_METHODS] = getMethodsAsString(route)
 
 		r[HANDLER_NAME] = GetHumanReadableNameForHandler(route.GetHandler())
 
@@ -41,6 +42,13 @@ func (m *GorillaMuxLister) Extract() ResultSet {
 	})
 
 	return result
+}
+
+func getMethodsAsString(route *mux.Route) string {
+	var routes []string
+	routes, _ = route.GetMethods()
+
+	return strings.Join(routes, ",")
 }
 
 func (m *GorillaMuxLister) List() string {
